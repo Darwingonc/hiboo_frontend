@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mi-proyecto": {
+    "hibo_frontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/mi-proyecto",
+            "outputPath": "dist/hibo_frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -27,7 +27,7 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles/styles.css"
             ],
             "scripts": []
           },
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mi-proyecto:build:production"
+              "buildTarget": "hibo_frontend:build:production"
             },
             "development": {
-              "buildTarget": "mi-proyecto:build:development"
+              "buildTarget": "hibo_frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,7 +85,9 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "@angular/material/prebuilt-themes/azure-blue.css",
+              "src/styles/tailwind.css",
+              "src/styles/styles.css"
             ],
             "scripts": []
           }
