@@ -1,0 +1,70 @@
+<div class="flex min-h-screen items-center justify-center bg-gray-100 px-4">
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
+    <!-- Logo -->
+    <div class="flex flex-col items-center mb-6">
+      <img src="images/hiboo.png" alt="Hiboo Logo" class="w-40">
+      <h1 class="text-2xl font-bold text-gray-800">Accede al sistema</h1>
+      <p class="text-gray-500 text-sm mt-1">Ingresa tus credenciales para continuar</p>
+    </div>
+
+    <!-- Formulario -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
+
+      <!-- Email -->
+      <div class="relative">
+        <input id="email" type="email" formControlName="email"
+               class="peer w-full pr-10 pl-4 pt-5 pb-2 rounded-lg border border-gray-300 text-gray-700 placeholder-transparent focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+               placeholder="correo@ejemplo.com" />
+
+        <!-- Icono fijo a la derecha -->
+        <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+    <i class="material-icons">mail</i>
+  </span>
+
+        <label for="email"
+               class="absolute left-4 text-gray-400 text-sm transition-all
+                peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base
+                peer-focus:top-1 peer-focus:text-blue-500 peer-focus:text-sm">
+          Correo
+        </label>
+
+        <p *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+           class="text-red-500 text-sm mt-1">Ingresa un correo válido</p>
+      </div>
+
+
+      <!-- Password -->
+      <div class="relative">
+        <input [type]="hidePassword ? 'password' : 'text'" id="password" formControlName="password"
+               class="peer w-full px-4 pt-5 pb-2 rounded-lg border border-gray-300 text-gray-700 placeholder-transparent focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+               placeholder="********" />
+        <label for="password"
+               class="absolute left-4 text-gray-400 text-sm transition-all
+                      peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base
+                      peer-focus:top-1 peer-focus:text-blue-500 peer-focus:text-sm
+                      {{ loginForm.get('password')?.value ? 'top-1 text-sm text-blue-500' : '' }}">
+          Contraseña
+        </label>
+
+        <!-- Mostrar/Ocultar contraseña -->
+        <button type="button" (click)="hidePassword = !hidePassword"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none">
+          {{ hidePassword ? 'Mostrar' : 'Ocultar' }}
+        </button>
+
+        <p *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+           class="text-red-500 text-sm mt-1">La contraseña es requerida (mínimo 6 caracteres)</p>
+      </div>
+
+      <!-- Botón -->
+      <button type="submit"
+              [disabled]="loading"
+              class="w-full py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-50">
+        {{ loading ? 'Ingresando...' : 'Ingresar' }}
+      </button>
+
+      <!-- Mensaje de error -->
+      <p *ngIf="errorMessage" class="text-red-500 text-sm text-center mt-2">{{ errorMessage }}</p>
+    </form>
+  </div>
+</div>
